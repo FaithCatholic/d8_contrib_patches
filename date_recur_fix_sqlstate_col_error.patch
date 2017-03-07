@@ -1,0 +1,13 @@
+diff --git a/src/Plugin/Field/FieldType/DateRecurFieldItemList.php b/src/Plugin/Field/FieldType/DateRecurFieldItemList.php
+index 08f6635..ef93017 100644
+--- a/src/Plugin/Field/FieldType/DateRecurFieldItemList.php
++++ b/src/Plugin/Field/FieldType/DateRecurFieldItemList.php
+@@ -34,7 +34,7 @@ class DateRecurFieldItemList extends DateRangeFieldItemList {
+     foreach ($this as $field_delta => $item) {
+       $dates = $item->getOccurrencesForCacheStorage();
+       foreach ($dates as $date) {
+-        $q->values(array_merge($default_values, [$field_delta], $date, [$delta]));
++        $q->values(array_values(array_merge($default_values, [$field_delta], $date, [$delta])));
+         $delta++;
+       }
+     }
