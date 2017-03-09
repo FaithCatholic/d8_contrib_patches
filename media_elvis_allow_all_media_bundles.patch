@@ -1,0 +1,13 @@
+diff --git a/MediaElvis.php b/MediaElvis.php
+index 8f8e40b..a52a5b4 100644
+--- a/MediaElvis.php
++++ b/MediaElvis.php
+@@ -624,7 +624,7 @@ class MediaElvis extends WidgetBase implements ContainerFactoryPluginInterface {
+         $form['media_entity_bundle']['#default_value'] = $bundle->id();
+       }
+ 
+-      $bundles = $this->entityTypeManager->getStorage('media_bundle')->loadByProperties(['type' => 'media_elvis_image']);
++      $bundles = $this->entityTypeManager->getStorage('media_bundle')->loadMultiple();
+       if (!empty($bundles)) {
+         foreach ($bundles as $bundle) {
+           $form['media_entity_bundle']['#options'][$bundle->id()] = $bundle->label();
