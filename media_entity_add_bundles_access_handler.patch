@@ -39,6 +39,18 @@ index 0000000..847d685
 +    switch ($operation) {
 +      case 'view':
 +        return AccessResult::allowedIfHasPermission($account, 'access content');
++
++      case 'delete':
++        if ($entity->isLocked()) {
++          return AccessResult::forbidden()->addCacheableDependency($entity);
++        }
++        else {
++          return parent::checkAccess($entity, $operation, $account)->addCacheableDependency($entity);
++        }
++        break;
++
++      default:
++        return parent::checkAccess($entity, $operation, $account);
 +    }
 +  }
 +
