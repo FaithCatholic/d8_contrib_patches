@@ -1,5 +1,9 @@
+diff --git a/.DS_Store b/.DS_Store
+new file mode 100644
+index 0000000..5008ddf
+Binary files /dev/null and b/.DS_Store differ
 diff --git a/src/Entity/MediaBundle.php b/src/Entity/MediaBundle.php
-index 8833f82..df51c81 100644
+index 8833f82..44cb451 100644
 --- a/src/Entity/MediaBundle.php
 +++ b/src/Entity/MediaBundle.php
 @@ -16,6 +16,7 @@ use Drupal\media_entity\MediaInterface;
@@ -10,12 +14,24 @@ index 8833f82..df51c81 100644
   *     "form" = {
   *       "add" = "Drupal\media_entity\MediaBundleForm",
   *       "edit" = "Drupal\media_entity\MediaBundleForm",
+@@ -241,4 +242,11 @@ class MediaBundle extends ConfigEntityBundleBase implements MediaBundleInterface
+     $this->new_revision = $new_revision;
+   }
+ 
++  /**
++   * {@inheritdoc}
++   */
++  public function isLocked() {
++    return FALSE;
++  }
++
+ }
 diff --git a/src/MediaBundleAccessControlHandler.php b/src/MediaBundleAccessControlHandler.php
 new file mode 100644
-index 0000000..847d685
+index 0000000..893f702
 --- /dev/null
 +++ b/src/MediaBundleAccessControlHandler.php
-@@ -0,0 +1,27 @@
+@@ -0,0 +1,39 @@
 +<?php
 +
 +namespace Drupal\media_entity;
