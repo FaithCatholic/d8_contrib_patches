@@ -1,0 +1,23 @@
+diff --git a/UserHasRole.php b/UserHasRole.php
+index 46c1166..9b633cb 100644
+--- a/UserHasRole.php
++++ b/UserHasRole.php
+@@ -51,16 +51,12 @@ class UserHasRole extends RulesConditionBase {
+    */
+   protected function doEvaluate(UserInterface $account, array $roles, $operation = 'AND') {
+ 
+-    $rids = array_map(function ($role) {
+-      return $role->id();
+-    }, $roles);
+-
+     switch ($operation) {
+       case 'OR':
+-        return (bool) array_intersect($rids, $account->getRoles());
++        return (bool) array_intersect($roles, $account->getRoles());
+ 
+       case 'AND':
+-        return (bool) !array_diff($rids, $account->getRoles());
++        return (bool) !array_diff($roles, $account->getRoles());
+ 
+       default:
+         throw new InvalidArgumentException('Either use "AND" or "OR". Leave empty for default "AND" behavior.');
