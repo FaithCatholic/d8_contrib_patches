@@ -1,0 +1,17 @@
+diff --git a/src/EntityEmbedBuilder.php b/src/EntityEmbedBuilder.php
+index 24e716a..343dc77 100644
+--- a/src/EntityEmbedBuilder.php
++++ b/src/EntityEmbedBuilder.php
+@@ -101,7 +101,11 @@ class EntityEmbedBuilder implements EntityEmbedBuilderInterface {
+     }
+ 
+     // Make sure that access to the entity is respected.
+-    $build['#access'] = $entity->access('view', NULL, TRUE);
++    if ($context['data-entity-type'] === 'file') {
++      $build['#access'] = TRUE; // Patched workaround to let *private* files display for non-authors.
++    } else {
++      $build['#access'] = $entity->access('view', NULL, TRUE); // Default behavior for non-files.
++    }
+ 
+     // @todo Should this hook get invoked if $build is an empty array?
+     $this->moduleHandler->alter(["{$context['data-entity-type']}_embed", 'entity_embed'], $build, $entity, $context);
