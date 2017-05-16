@@ -1,0 +1,16 @@
+diff --git a/user_default_page.module b/user_default_page.module
+index d06ccf7..a56a23c 100644
+--- a/user_default_page.module
++++ b/user_default_page.module
+@@ -90,10 +90,7 @@ function user_default_page_user_login($account) {
+  * Redirect path for login and logout.
+  */
+ function user_default_page_redirect($path) {
+-  $url_object = \Drupal::service('path.validator')->getUrlIfValid($path);
+-  $url_object->setAbsolute();
+-  $url = $url_object->toString();
+-  $response = new RedirectResponse($url);
++  $response = new RedirectResponse($path);
+   $response->send();
+   //exit;
+ }
