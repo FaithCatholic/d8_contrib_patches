@@ -1,14 +1,18 @@
 diff --git a/src/EntityEmbedBuilder.php b/src/EntityEmbedBuilder.php
-index 24e716a..343dc77 100644
+index 24e716a..98c1686 100644
 --- a/src/EntityEmbedBuilder.php
 +++ b/src/EntityEmbedBuilder.php
-@@ -101,7 +101,11 @@ class EntityEmbedBuilder implements EntityEmbedBuilderInterface {
+@@ -101,7 +101,15 @@ class EntityEmbedBuilder implements EntityEmbedBuilderInterface {
      }
  
      // Make sure that access to the entity is respected.
 -    $build['#access'] = $entity->access('view', NULL, TRUE);
 +    if ($context['data-entity-type'] === 'file') {
-+      $build['#access'] = TRUE; // Patched workaround to let *private* files display for non-authors.
++      // Patched workaround to let *private* files display for non-authors
++      // by leveraging private_files_download_permission module.
++      if ($access = \Drupal::currentUser()->hasPermission('bypass pfdp')) {
++        $build['#access'] = TRUE;
++      }
 +    } else {
 +      $build['#access'] = $entity->access('view', NULL, TRUE); // Default behavior for non-files.
 +    }
