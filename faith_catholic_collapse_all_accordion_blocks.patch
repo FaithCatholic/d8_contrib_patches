@@ -1,0 +1,13 @@
+diff --git a/js/accordion-widget.js b/js/accordion-widget.js
+index 84a8c16..e74e66c 100644
+--- a/js/accordion-widget.js
++++ b/js/accordion-widget.js
+@@ -1,5 +1,5 @@
+-(function($) {  
++(function($) {
+     $(document).ready(function(){
+-       $('.accordion_blocks_container').accordion({header: "h2.accordion-title", autoHeight: false}); 
++       $('.accordion_blocks_container').accordion({header: "h2.accordion-title", autoHeight: false, collapsible: true, active: false});
+     });
+ })(jQuery);
+\ No newline at end of file
